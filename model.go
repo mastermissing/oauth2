@@ -23,6 +23,8 @@ type (
 	TokenInfo interface {
 		New() TokenInfo
 
+		GetGrantType() string
+		SetGrantType(string)
 		GetClientID() string
 		SetClientID(string)
 		GetUserID() string

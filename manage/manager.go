@@ -151,7 +151,13 @@ func (m *Manager) GenerateAuthToken(ctx context.Context, rt oauth2.ResponseType,
 		}
 	}
 
+	gt := oauth2.AuthorizationCode
+	if rt == oauth2.Token {
+		gt = oauth2.Implicit
+	}
+
 	ti := models.NewToken()
+	ti.SetGrantType(string(gt))
 	ti.SetClientID(tgr.ClientID)
 	ti.SetUserID(tgr.UserID)
 	ti.SetRedirectURI(tgr.RedirectURI)
@@ -316,6 +322,7 @@ func (m *Manager) GenerateAccessToken(ctx context.Context, gt oauth2.GrantType, 
 	}
 
 	ti := models.NewToken()
+	ti.SetGrantType(string(gt))
 	ti.SetClientID(tgr.ClientID)
 	ti.SetUserID(tgr.UserID)
 	ti.SetRedirectURI(tgr.RedirectURI)

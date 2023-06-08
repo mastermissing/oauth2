@@ -15,6 +15,7 @@ func NewToken() *Token {
 type Token struct {
 	ClientID            string        `bson:"ClientID"`
 	UserID              string        `bson:"UserID"`
+	GrantType           string        `bson:"GrantType"`
 	RedirectURI         string        `bson:"RedirectURI"`
 	Scope               string        `bson:"Scope"`
 	Code                string        `bson:"Code"`
@@ -33,6 +34,16 @@ type Token struct {
 // New create to token model instance
 func (t *Token) New() oauth2.TokenInfo {
 	return NewToken()
+}
+
+// GetGrantType the grant type
+func (t *Token) GetGrantType() string {
+	return t.GrantType
+}
+
+// SetGrantType the grant type
+func (t *Token) SetGrantType(grantType string) {
+	t.GrantType = grantType
 }
 
 // GetClientID the client id
